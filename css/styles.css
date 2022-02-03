@@ -1,6 +1,12 @@
 #resultField {
-  min-height: 20px;
+  min-height: 64px;
   margin-top: 2em;
+  padding: 1em;
+  background-color: black;
+  color: white;
+  font-family: monospace;
+  font-size: 1.3em;
+  border-radius: .5em;
 }
 #wrapper {
   width: 400px;
