@@ -5,12 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rechner</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-      integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="./css/all.min.css" />
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
@@ -20,26 +15,27 @@
         <button data-char="7"><b>7</b></button>
         <button data-char="8"><b>8</b></button>
         <button data-char="9"><b>9</b></button>
-        <button data-char="*">x</button>
+        <button data-char="*"><i class="fas fa-times"></i></button>
         <button data-char="4"><b>4</b></button>
         <button data-char="5"><b>5</b></button>
         <button data-char="6"><b>6</b></button>
-        <button data-char="-">-</button>
+        <button data-char="-"><i class="fas fa-minus"></i></button>
         <button data-char="1"><b>1</b></button>
         <button data-char="2"><b>2</b></button>
         <button data-char="3"><b>3</b></button>
-        <button class="btn btn-success" data-char="+">+</button>
-        <button class="btn btn-danger" data-char="">
-          <span class="glyphicon glyphicon-remove"></span>
-        </button>
+        <button data-char="+"><i class="fas fa-plus"></i></button>
+        <button data-char="."><b>,</b></button>
         <button data-char="0"><b>0</b></button>
-        <button data-char="/">:</button>
-        <button data-char=".">,</button>
-        <button data-char="C">C</button>
-        <button data-char="(">(</button>
-        <button data-char=")">)</button>
-        <button data-char="=">=</button>
-        <button data-char="**">x²</button>
+        <button data-char="exponentiate"><b>x²</b></button>
+        <button data-char="/"><i class="fas fa-divide"></i></button>
+        <button data-char="("><b>(</b></button>
+        <button data-char=")"><b>)</b></button>
+        <button data-char="square-root"><i class="fas fa-square-root-alt"></i></button>
+        <button data-char="=" style="background-color: lightgreen;"><i class="fas fa-equals"></i></button>
+        <button data-char="delete" style="background-color: lightcoral;"><i class="fas fa-trash-alt"></i><span>Löschen</span></button>
+        <button data-char="backspace"><i class="fas fa-backspace"></i><span>Zurück</span></button>
+        <button data-char="save"><i class="fas fa-save"></i><span>Speichern</span></button>
+        <button data-char="paste"><i class="fas fa-paste"></i><span>Einfügen</span></button>
       </section>
     </div>
     <script src="./js/script.js"></script>

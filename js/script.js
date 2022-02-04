@@ -15,23 +15,35 @@ Array.from(buttons).forEach((button) => {
         console.log(err);
       }
       resultClicked = true;
-    } else if (button.dataset.char === "C") {
-      resultField.innerHTML = "";
-    } else if (button.dataset.char === "") {
-      resultField.innerHTML = resultField.innerHTML.slice(0, -1);
-      mathString = mathString.slice(0, -1);
-      console.log(mathString);
-    } else if (button.dataset.char === "**") {
+    } else if (button.dataset.char === "delete") {
+      resetMathString();
+    } else if (button.dataset.char === "backspace") {
+      deleteLastChar();
+    } else if (button.dataset.char === "exponentiate") {
       console.log("Hallo ich bin hier");
     } else {
       if (resultClicked) {
-        resultField.innerHTML = "";
-        mathString = "";
+        resetMathString();
         resultClicked = false;
       }
       mathString += button.dataset.char;
-      resultField.innerHTML += button.innerText;
-      console.log(mathString);
+      switch(button.dataset.char){
+        case "/":
+          resultField.innerHTML += ':';
+          break;
+        default:
+          resultField.innerHTML += button.dataset.char;
+      }
     }
   });
 });
+
+function resetMathString() {
+  resultField.innerHTML = "";
+  mathString = "";
+}
+
+function deleteLastChar() {
+  resultField.innerHTML = resultField.innerHTML.slice(0, -1);
+  mathString = mathString.slice(0, -1);
+}
