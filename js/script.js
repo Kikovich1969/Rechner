@@ -20,7 +20,11 @@ Array.from(buttons).forEach((button) => {
     } else if (button.dataset.char === "backspace") {
       deleteLastChar();
     } else if (button.dataset.char === "exponentiate") {
-      console.log("Hallo ich bin hier");
+      //console.log("Hallo ich bin hier");
+      console.log(mathString.split(/[\-+*/()]/g).pop());
+      let base = mathString.split(/[\-+*/()]/g).pop();
+      mathString += base * base;
+      resultField.innerHTML += base * base;
     } else {
       if (resultClicked) {
         resetMathString();
