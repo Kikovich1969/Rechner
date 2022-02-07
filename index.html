@@ -12,30 +12,31 @@
     <div id="wrapper">
       <p id="resultField"></p>
       <section>
-        <button data-char="7"><b>7</b></button>
-        <button data-char="8"><b>8</b></button>
-        <button data-char="9"><b>9</b></button>
-        <button data-char="*"><i class="fas fa-times"></i></button>
-        <button data-char="4"><b>4</b></button>
-        <button data-char="5"><b>5</b></button>
-        <button data-char="6"><b>6</b></button>
-        <button data-char="-"><i class="fas fa-minus"></i></button>
-        <button data-char="1"><b>1</b></button>
-        <button data-char="2"><b>2</b></button>
-        <button data-char="3"><b>3</b></button>
-        <button data-char="+"><i class="fas fa-plus"></i></button>
-        <button data-char="."><b>,</b></button>
-        <button data-char="0"><b>0</b></button>
-        <button data-char="exponentiate"><b>x²</b></button>
-        <button data-char="/"><i class="fas fa-divide"></i></button>
-        <button data-char="("><b>(</b></button>
-        <button data-char=")"><b>)</b></button>
-        <button data-char="square-root"><i class="fas fa-square-root-alt"></i></button>
-        <button data-char="=" style="background-color: lightgreen;"><i class="fas fa-equals"></i></button>
-        <button data-char="delete" style="background-color: lightcoral;"><i class="fas fa-trash-alt"></i><span>Löschen</span></button>
-        <button data-char="backspace"><i class="fas fa-backspace"></i><span>Zurück</span></button>
-        <button data-char="save"><i class="fas fa-save"></i><span>Speichern</span></button>
-        <button data-char="paste"><i class="fas fa-paste"></i><span>Einfügen</span></button>
+        <button data-intern="7" data-display="7"><b>7</b></button>
+        <button data-intern="8" data-display="8"><b>8</b></button>
+        <button data-intern="9" data-display="9"><b>9</b></button>
+        <button data-intern="*" data-display="x"><i class="fas fa-times"></i></button>
+        <button data-intern="4" data-display="4"><b>4</b></button>
+        <button data-intern="5" data-display="5"><b>5</b></button>
+        <button data-intern="6" data-display="6"><b>6</b></button>
+        <button data-intern="-" data-display="-"><i class="fas fa-minus"></i></button>
+        <button data-intern="1" data-display="1"><b>1</b></button>
+        <button data-intern="2" data-display="2"><b>2</b></button>
+        <button data-intern="3" data-display="3"><b>3</b></button>
+        <button data-intern="+" data-display="+"><i class="fas fa-plus"></i></button>
+        <button data-intern="." data-display=","><b>,</b></button>
+        <button data-intern="0" data-display="0"><b>0</b></button>
+        <button data-intern="exponentiate" data-display="exponentiate"><b>x²</b></button>
+        <button data-intern="/" data-display=":"><i class="fas fa-divide"></i></button>
+        <button data-intern="(" data-display="("><b>(</b></button>
+        <button data-intern=")" data-display=")"><b>)</b></button>
+        <button data-intern="square-root" data-display="square-root"><i class="fas fa-square-root-alt"></i></button>
+        <button data-intern="*-1" data-display="-"><b>+/-</b></button>
+        <button data-intern="delete" data-display="delete" style="background-color: lightcoral;"><i class="fas fa-trash-alt"></i><span>Löschen</span></button>
+        <button data-intern="backspace" data-display="backspace"><i class="fas fa-backspace"></i><span>Zurück</span></button>
+        <button data-intern="save" data-display="save"><i class="fas fa-save"></i><span>Speichern</span></button>
+        <button data-intern="paste" data-display="paste"><i class="fas fa-paste"></i><span>Einfügen</span></button>
+        <button class="result" data-intern="=" data-display="=" style="grid-column: 1 / span 4; background-color: lightgreen;"><i class="fas fa-equals"></i></button>
       </section>
     </div>
     <script src="./js/script.js"></script>
