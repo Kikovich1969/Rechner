@@ -1,14 +1,15 @@
 let resultClicked = false;
 let buttons = document.getElementsByTagName("button");
 const resultField = document.getElementById("resultField");
-let mathString = "";
+let mathStringIntern = ""; // String for calculation
+//let mathStringView = ""; // Sting for presentation
 
 Array.from(buttons).forEach((button) => {
   button.addEventListener("click", () => {
     if (button.dataset.intern === "=") {
       try {
-        mathString = eval(mathString);
-        resultField.innerHTML = mathString;
+        mathStringIntern = eval(mathStringIntern);
+        resultField.innerHTML = mathStringIntern;
       } catch (err) {
         resultField.innerHTML =
           '<span style="color: red; font-weight: bold;">Überprüfen Sie Ihre Eingabe!</span>';
@@ -20,25 +21,28 @@ Array.from(buttons).forEach((button) => {
     } else if (button.dataset.intern === "backspace") {
       deleteLastChar();
     } else if (button.dataset.intern === "exponentiate") {
-      //console.log(mathString.split(/[\-+*/()]/g).pop());
-      let base = mathString.split(/[\-+*/()]/g).pop();
-      mathString = mathString.replace(
-        mathString.split(/[\-+*/()]/g).pop(),
-        base * base
+      //console.log(mathStringIntern.split(/[\-+*/()]/g).pop());
+      let base = mathStringIntern.split(/[\-+*/()]/g).pop();
+      mathStringIntern = mathStringIntern.replace(
+        mathStringIntern.split(/[\-+*/()]/g).pop(),
+        Math.pow(base, 2)
       );
-      resultField.innerHTML = mathString;
+      resultField.innerHTML = mathStringIntern;
     } else {
       if (resultClicked) {
         resetMathString();
         resultClicked = false;
       }
-      mathString += button.dataset.intern;
+      mathStringIntern += button.dataset.intern;
       switch (button.dataset.intern) {
         case "/":
           resultField.innerHTML += ":";
           break;
         case ".":
           resultField.innerHTML += ",";
+          break;
+        case "*":
+          resultField.innerHTML += "x";
           break;
         default:
           resultField.innerHTML += button.dataset.intern;
@@ -48,11 +52,13 @@ Array.from(buttons).forEach((button) => {
 });
 
 function resetMathString() {
-  resultField.innerHTML = "";
-  mathString = "";
+  mathStringIntern = "";
+  //mathStringView = "";
+  arrMathString = [];
+  resultField.innerHTML = mathStringIntern;
 }
 
 function deleteLastChar() {
-  resultField.innerHTML = resultField.innerHTML.slice(0, -1);
-  mathString = mathString.slice(0, -1);
+  resultField.innerText = resultField.innerText.slice(0, -1);
+  mathStringIntern = mathStringIntern.slice(0, -1);
 }
