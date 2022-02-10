@@ -3,100 +3,119 @@ let result = null;
 let buttons = document.getElementsByTagName("button");
 const resultField = document.getElementById("resultField");
 let arrSymbols = [];
-let mathString = ""; // String for calculation
-//let mathStringView = ""; // String for presentation
-
-/* 
-  let a = ['3','+','3','/','2'];
-  eval(a.join(''));
- */
 
 Array.from(buttons).forEach((button) => {
   button.addEventListener("click", () => {
     let lastSymbol = arrSymbols[arrSymbols.length - 1];
     let newSymbol = button.dataset.intern;
-    let pattern = /[0-9\.]/;
+    let pattern = /[0-9\.]/; // Only numbers and dots
 
-    console.log(`last symbol: ${lastSymbol}`);
-    console.log(`new symbol: ${newSymbol}`);
-
-    console.log(pattern.test(lastSymbol));
-    console.log(pattern.test(newSymbol));
-    console.log(`Array before: ${arrSymbols.length}`);
-    
-    if (arrSymbols.length === 0) {
-      arrSymbols.push(newSymbol);
-      console.log('Im here');
-      console.log(`Array after: ${arrSymbols.length}`);
-    } else {
-      if (pattern.test(lastSymbol) && pattern.test(newSymbol)) {
-        arrSymbols[arrSymbols.length - 1] += newSymbol;
-      } else {
-        arrSymbols.push(newSymbol);
-      }
-    }
-
-    /* if (pattern.test(lastSymbol) && pattern.test(newSymbol)) {
-      arrSymbols[arrSymbols.lastIndexOf(lastSymbol)] = lastSymbol + newSymbol;
-    } else {
-      arrSymbols.push(button.dataset.intern);
-    } */
-    console.log(arrSymbols);
-
-    //arrSymbols.push(button.dataset.intern);
-    if (button.dataset.intern === "=") {
-      try {
-        result = eval(mathString);
-        resultField.innerHTML = result;
-      } catch (err) {
-        resultField.innerHTML =
-          '<span style="color: red; font-weight: bold;">Überprüfen Sie Ihre Eingabe!</span>';
-        console.log(err);
-      }
-      resultButtonClicked = true;
-    } else if (button.dataset.intern === "delete") {
-      resetMathString();
-    } else if (button.dataset.intern === "backspace") {
-      deleteLastChar();
-    } else if (button.dataset.intern === "exponentiate") {
-      //console.log(mathString.split(/[\-+*/()]/g).pop());
-      let base = mathString.split(/[\-+*/()]/g).pop();
-      mathString = mathString.replace(
-        mathString.split(/[\-+*/()]/g).pop(),
-        Math.pow(base, 2)
-      );
-      resultField.innerHTML = mathString;
-    } else {
-      if (resultButtonClicked) {
-        resetMathString();
-        resultButtonClicked = false;
-      }
-      mathString += button.dataset.intern;
-      switch (button.dataset.intern) {
-        case "/":
-          resultField.innerHTML += ":";
-          break;
-        case ".":
-          resultField.innerHTML += ",";
-          break;
-        case "*":
-          resultField.innerHTML += "x";
-          break;
-        default:
-          resultField.innerHTML += button.dataset.intern;
-      }
+    switch (newSymbol) {
+      case "=":
+        calcResult();
+        break;
+      case "exponentiate":
+        exponentiate(pattern);
+        break;
+      case "square-root":
+        squareRoot(pattern);
+        break;
+      case 'change-of-sign':
+        changeOfSign(pattern);
+        break;
+      case "delete":
+        clearDisplay();
+        break;
+      case "backspace":
+        deleteLastChar();
+        break;
+      case "save":
+        saveResult();
+        break;
+      case "paste":
+        paste();
+        break;
+      case 'console':
+        console.log(arrSymbols);
+        break;
+      default:
+        addToString(newSymbol, lastSymbol, pattern);
     }
   });
 });
 
-function resetMathString() {
-  mathString = "";
-  //mathStringView = "";
-  arrMathString = [];
-  resultField.innerHTML = mathString;
+function calcResult() {
+  try {
+    result = eval(arrSymbols.join(""));
+    display(result);
+    arrSymbols = [String(result)];
+  } catch (err) {
+    resultField.innerHTML =
+      '<span style="color: red; font-weight: bold;">Überprüfen Sie Ihre Eingabe!</span>';
+    console.log(err);
+    arrSymbols = [];
+  } finally {
+    //resultButtonClicked = true;
+  }
+}
+
+function addToString(newSymbol, lastSymbol, pattern) {
+  if (lastSymbol === undefined) {
+    arrSymbols.push(newSymbol);
+  } else {
+    if (pattern.test(lastSymbol) && pattern.test(newSymbol)) {
+      arrSymbols[arrSymbols.length - 1] += newSymbol;
+    } else {
+      arrSymbols.push(newSymbol);
+    }
+  }
+  display(arrSymbols.join(""));
+  console.log(arrSymbols);
+}
+
+function clearDisplay() {
+  arrSymbols = [];
+  resultField.innerHTML = "";
 }
 
 function deleteLastChar() {
-  resultField.innerText = resultField.innerText.slice(0, -1);
-  mathString = mathString.slice(0, -1);
+  let lastSymbol = arrSymbols.pop();
+  console.log(`last symbol: ${lastSymbol}`);
+  if (lastSymbol !== undefined) {
+    lastSymbol = lastSymbol.slice(0, -1);
+    console.log(`last char: ${lastSymbol}`);
+    if (lastSymbol !== "") {
+      arrSymbols.push(lastSymbol);
+    }
+  }
+  console.log(`symbols: ${arrSymbols}`);
+  display(arrSymbols.join(""));
+}
+
+function exponentiate(pattern) {
+  let lastSymbol = arrSymbols.pop();
+  if (pattern.test(lastSymbol)) {
+    arrSymbols.push(String(Math.pow(lastSymbol, 2)));
+    display(arrSymbols.join(""));
+  }
+}
+
+function squareRoot(pattern) {
+  let lastSymbol = arrSymbols.pop();
+  if (pattern.test(lastSymbol)) {
+    arrSymbols.push(String(Math.sqrt(lastSymbol)));
+    display(arrSymbols.join(""));
+  }
+}
+
+function changeOfSign(pattern){
+  let lastSymbol = arrSymbols.pop();
+  if (pattern.test(lastSymbol)) {
+    arrSymbols.push(String(lastSymbol *= -1));
+    display(arrSymbols.join(""));
+  }
+}
+
+function display(symbols) {
+  resultField.innerHTML = symbols;
 }
